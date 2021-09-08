@@ -8,7 +8,5 @@ export const encode = (input: string): string => encoder.execute(input);
 export const decode = (input: string): string => decoder.execute(input);
 
 export const encodeURI = (input: string) => encode(window.encodeURI(input));
-export const decodeURI = (input: string) => {
-  const d = decode(input);
-  return window.decodeURI(d);
-};
+export const decodeURI = (input: string) => window.decodeURI(decode(input));
+
