@@ -1,25 +1,29 @@
 {
-  "version": "0.1.0",
+  "version": "0.9.1",
   "license": "MIT",
+  "private": false,
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist/*"
   ],
   "engines": {
     "node": ">=10"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kunigi/string-compression.git"
+  },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "tsdx build --production",
     "test": "tsdx test",
     "lint": "onchange \"src/*\" -- tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "demo": "es-dev-server --node-resolve"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -33,12 +37,14 @@
   },
   "name": "@kunigi/string-compression",
   "author": "kunigi",
-  "module": "dist/index.esm.js",
+  "module": "dist/string-compression.esm.js",
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@size-limit/preset-small-lib": "^5.0.2",
+    "es-dev-server": "^2.1.0",
     "husky": "^7.0.2",
+    "onchange": "^7.1.0",
     "size-limit": "^5.0.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
@@ -46,7 +52,6 @@
   },
   "dependencies": {
     "@types/lodash-es": "^4.17.4",
-    "lodash-es": "^4.17.21",
-    "onchange": "^7.1.0"
+    "lodash-es": "^4.17.21"
   }
 }
