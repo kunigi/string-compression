@@ -1,5 +1,5 @@
 {
-  "version": "0.9.1",
+  "version": "0.9.2",
   "license": "MIT",
   "private": false,
   "main": "dist/index.js",
@@ -14,6 +14,20 @@
     "type": "git",
     "url": "https://github.com/kunigi/string-compression.git"
   },
+  "homepage": "https://kunigi.org",
+  "keywords": [
+    "compression",
+    "string",
+    "url",
+    "uri",
+    "safe",
+    "encoder",
+    "serialize",
+    "compressor",
+    "data",
+    "JSONCrush",
+    "JSCrush"
+  ],
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build --production",
