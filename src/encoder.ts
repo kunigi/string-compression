@@ -1,4 +1,3 @@
-import { times } from 'lodash';
 import { swapJsonCharacters } from './swap';
 
 interface ISubstringHashCount {
@@ -7,6 +6,12 @@ interface ISubstringHashCount {
 
 interface ICompressorConfiguration {
   maxSubstringLength: number;
+}
+
+const timesIterate = (nr: number, cb: any) => {
+  for (let x = 0; x < nr; x++) {
+    cb(x);
+  }
 }
 
 export default class Encoder implements IEncoding {
@@ -56,7 +61,7 @@ export default class Encoder implements IEncoding {
   seedCharacters(): string[] {
     let characters: string[] = [];
 
-    times(this.timesToIterate, nr => {
+    timesIterate(this.timesToIterate, (nr: number) => {
       if (
         (nr >= 48 && nr <= 57) ||
         (nr >= 65 && nr <= 90) ||
