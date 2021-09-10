@@ -1,5 +1,5 @@
 {
-  "version": "0.9.3",
+  "version": "1.0.0",
   "license": "MIT",
   "private": false,
   "main": "dist/index.js",
@@ -23,6 +23,7 @@
     "safe",
     "encoder",
     "serialize",
+    "lossless",
     "compressor",
     "data",
     "JSONCrush",

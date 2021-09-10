@@ -1,58 +1,97 @@
-import { encode, encodeURI, decode, decodeURI } from '../src';
+import {
+  encode,
+  encodeURI,
+  decode,
+  decodeURI,
+  encodeURIComponent,
+  decodeURIComponent,
+} from '../src';
 
-describe('Compressor tests', () => {
-  describe('encode', () => {
-    it('should provide expected compressed result', () => {
-      expect(encode(`hello world!`)).toEqual(`hello world':_`);
-    });
-  });
-
-  describe('decode', () => {
-    it('should be able to restore to initial value', () => {
-      const json = JSON.stringify({
-        a: 2,
-        b: 3,
-        c: [{ x: 1, y: 2 }],
-        d: 'abcd',
+describe('string-compressor', () => {
+  describe('simple string', () => {
+    describe('encode()', () => {
+      it('should be able to encode using encode()', () => {
+        expect(encode(`hello world!`)).toEqual(`hello world':_`);
       });
 
-      const output = encode(json);
-      expect(output).toEqual(`('a!2~b!3~c![('x!1~y!2)]~d!'abcd')_`);
-      const jsonOuput = decode(output);
-      expect(jsonOuput).toEqual(json);
-    });
-  });
-
-  describe('decode', () => {
-    it('should be able to restore to initial value', () => {
-      const json = JSON.stringify({
-        a: 2,
-        b: 3,
-        c: [{ x: 1, y: 2 }],
-        d: 'abcd',
+      it('should be able to encode using encodeURI()', () => {
+        expect(encodeURI(`hello world!`)).toEqual(`hello%20world':_`);
       });
 
-      const output = encode(json);
-      expect(output).toEqual(`('a!2~b!3~c![('x!1~y!2)]~d!'abcd')_`);
-      const jsonOuput = decode(output);
-      expect(jsonOuput).toEqual(json);
-    });
-  });
-
-  describe('encodeUri', () => {
-    it('should', () => {
-      expect(encodeURI('hello world!')).toEqual(`hello%20world':_`);
-    });
-  });
-
-  describe('decodeUri', () => {
-    it('should', () => {
-      const json = JSON.stringify({
-        d: 'шеллы',
+      it('should be able to encode using encodeURIComponent()', () => {
+        expect(encodeURIComponent('hello world!')).toEqual(
+          `hello%20world'%3A_`
+        );
       });
-      const output = encodeURI(json);
-      const jsonOutput = decodeURI(output);
-      expect(JSON.parse(jsonOutput)).toEqual(JSON.parse(json));
+    });
+
+    describe('decode()', () => {
+      it('should be able to decode using decode()', () => {
+        expect(decode(`hello world':_`)).toEqual(`hello world!`);
+      });
+
+      it('should be able to decode using decodeURI()', () => {
+        expect(decodeURI(`hello%20world':_`)).toEqual(`hello world!`);
+      });
+
+      it('should be able to decode using decodeURIComponent()', () => {
+        expect(decodeURIComponent(`hello%20world'%3A_`)).toEqual(
+          `hello world!`
+        );
+      });
+    });
+  });
+
+  describe('simple object', () => {
+    const object = JSON.stringify({ x: 1, y: 2 });
+
+    describe('encode & decode', () => {
+      it('should be able to encode using encode() and decode using decode()', () => {
+        const encodedOutput = encode(JSON.stringify(object));
+        const decodedOutput = decode(encodedOutput);
+        expect(JSON.parse(decodedOutput)).toEqual(object);
+      });
+
+      it('should be able to encode using encodeURI() and decode using decodeURI()', () => {
+        const encodedOutput = encodeURI(JSON.stringify(object));
+        const decodedOutput = decodeURI(encodedOutput);
+        expect(JSON.parse(decodedOutput)).toEqual(object);
+      });
+
+      it('should be able to encode using encodeURIComponent() and decode using decodeURIComponent()', () => {
+        const encodedOutput = encodeURIComponent(JSON.stringify(object));
+        const decodedOutput = decodeURIComponent(encodedOutput);
+        expect(JSON.parse(decodedOutput)).toEqual(object);
+      });
+    });
+  });
+
+  describe('more complex object', () => {
+    const object = JSON.stringify({
+      a: 2,
+      b: 3,
+      c: [{ x: 1, y: 2 }],
+      d: 'abcd',
+    });
+
+    describe('encode & decode', () => {
+      it('should be able to encode using encode() and decode using decode()', () => {
+        const encodedOutput = encode(JSON.stringify(object));
+        const decodedOutput = decode(encodedOutput);
+        expect(JSON.parse(decodedOutput)).toEqual(object);
+      });
+
+      it('should be able to encode using encodeURI() and decode using decodeURI()', () => {
+        const encodedOutput = encodeURI(JSON.stringify(object));
+        const decodedOutput = decodeURI(encodedOutput);
+        expect(JSON.parse(decodedOutput)).toEqual(object);
+      });
+
+      it('should be able to encode using encodeURIComponent() and decode using decodeURIComponent()', () => {
+        const encodedOutput = encodeURIComponent(JSON.stringify(object));
+        const decodedOutput = decodeURIComponent(encodedOutput);
+        expect(JSON.parse(decodedOutput)).toEqual(object);
+      });
     });
   });
 });
