@@ -1,5 +1,5 @@
 # string-compression 
-Reduces the size of strings. Has zero dependencies. Made possible by the very efficient JSCrush algorithm.
+Reduces the size of strings. Has zero dependencies. Works in browser. Made possible by the very efficient JSCrush algorithm.
 
 ## Install
 ```
