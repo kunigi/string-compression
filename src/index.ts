@@ -1,7 +1,7 @@
 import Decoder from './decoder';
 import Encoder from './encoder';
 
-const container = (typeof window !== null 
+const container = (typeof window !== "undefined" 
   && window.encodeURI
   && window.decodeURI
   && window.encodeURIComponent

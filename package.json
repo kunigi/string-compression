@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "private": false,
   "main": "dist/index.js",
@@ -25,6 +25,8 @@
     "serialize",
     "lossless",
     "compressor",
+    "node",
+    "nodejs",
     "data",
     "browser",
     "JSONCrush",
